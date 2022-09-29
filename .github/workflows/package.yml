@@ -18,4 +18,4 @@ jobs:
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Publish the package to GPR
-        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.TOKEN}} --source https://nuget.pkg.github.com/blaze6950/GitHubActionsSample/index.json
+        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/blaze6950/GitHubActionsSample/index.json
