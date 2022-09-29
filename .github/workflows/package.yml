@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '6.0.x'
       - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Test
-        run: dotnet test GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --no-build --verbosity normal
+        run: dotnet test GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
   publish:
