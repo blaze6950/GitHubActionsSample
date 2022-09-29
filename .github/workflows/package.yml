@@ -1,0 +1,23 @@
+﻿name: .NET Package
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: dotnet build GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - name: Create the package
+        run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - name: Publish the package to GPR
+        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/*.nupkg
