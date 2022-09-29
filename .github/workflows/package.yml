@@ -25,13 +25,24 @@ jobs:
       - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Test
         run: dotnet test GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal
-      - name: Create the package
-        run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - name: Cache
+        if: github.ref == 'refs/heads/master'
+        uses: actions/cache@v3.0.8
+        with:
+          path: /home/runner/work/GitHubActionsSample/GitHubActionsSample/GitHubActionsSample.Package/bin/Release
+          key: binaries
   publish:
     if: github.ref == 'refs/heads/master'
     needs: build-and-test
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - name: Cache
+        uses: actions/cache@v3.0.8
+        with:
+          path: /home/runner/work/GitHubActionsSample/GitHubActionsSample/GitHubActionsSample.Package/bin/Release
+          key: binaries
+      - name: Create the package
+        run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Publish the package to GPR
         run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/blaze6950/index.json
