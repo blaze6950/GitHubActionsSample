@@ -28,7 +28,7 @@ jobs:
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
   publish:
-    if: github.branch == 'master'
+    if: github.ref == 'refs/heads/master'
     needs: build-and-test
     runs-on: ubuntu-latest
     environment: production
