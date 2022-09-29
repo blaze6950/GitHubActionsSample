@@ -1,5 +1,5 @@
-using GitHubActionsSample.NuGet.Models;
-using GitHubActionsSample.NuGet.Services.Interfaces;
+using GitHubActionsSample.Package.Models;
+using GitHubActionsSample.Package.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GitHubActionsSample.Api.Controllers;

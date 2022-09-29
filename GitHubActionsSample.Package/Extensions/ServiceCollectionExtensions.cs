@@ -1,8 +1,8 @@
-﻿using GitHubActionsSample.NuGet.Services;
-using GitHubActionsSample.NuGet.Services.Interfaces;
+﻿using GitHubActionsSample.Package.Services;
+using GitHubActionsSample.Package.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GitHubActionsSample.NuGet.Extensions;
+namespace GitHubActionsSample.Package.Extensions;
 
 public static class ServiceCollectionExtensions
 {

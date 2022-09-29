@@ -1,4 +1,4 @@
-namespace GitHubActionsSample.NuGet.Models;
+namespace GitHubActionsSample.Package.Models;
 
 public class WeatherForecast
 {

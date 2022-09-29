@@ -1,4 +1,4 @@
-using GitHubActionsSample.NuGet.Extensions;
+using GitHubActionsSample.Package.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

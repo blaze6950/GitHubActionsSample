@@ -1,6 +1,6 @@
-﻿using GitHubActionsSample.NuGet.Models;
+﻿using GitHubActionsSample.Package.Models;
 
-namespace GitHubActionsSample.NuGet.Services.Interfaces;
+namespace GitHubActionsSample.Package.Services.Interfaces;
 
 public interface IWeatherProvider
 {

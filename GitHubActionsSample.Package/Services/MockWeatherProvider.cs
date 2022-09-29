@@ -1,7 +1,7 @@
-﻿using GitHubActionsSample.NuGet.Models;
-using GitHubActionsSample.NuGet.Services.Interfaces;
+﻿using GitHubActionsSample.Package.Models;
+using GitHubActionsSample.Package.Services.Interfaces;
 
-namespace GitHubActionsSample.NuGet.Services;
+namespace GitHubActionsSample.Package.Services;
 
 internal class MockWeatherProvider : IWeatherProvider
 {
