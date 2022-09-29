@@ -14,11 +14,14 @@ jobs:
       - uses: actions/setup-dotnet@v2.1.1
         with:
           dotnet-version: '6.0.x'
-          source-url: https://nuget.pkg.github.com/blaze6950/GitHubActionsSample/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - uses: actions/setup-dotnet@v2.1.1
+        with:
+          dotnet-version: '6.0.x'
+          source-url: https://nuget.pkg.github.com/blaze6950/GitHubActionsSample/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Publish the package to GPR
         run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg
