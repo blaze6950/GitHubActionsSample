@@ -23,7 +23,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: actions/cache@v3.0.8
         with:
-          path: ~/GitHubActionsSample.Package/bin/Release
+          path: GitHubActionsSample.Package
           key: binaries
       - uses: actions/setup-dotnet@v2.1.1
         with:
@@ -40,7 +40,7 @@ jobs:
       - name: Cache
         uses: actions/cache@v3.0.8
         with:
-          path: ~/GitHubActionsSample.Package/bin/Release
+          path: GitHubActionsSample.Package
           key: binaries
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
