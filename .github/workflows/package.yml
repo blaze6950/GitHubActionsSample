@@ -14,10 +14,8 @@ jobs:
       - uses: actions/setup-dotnet@v2.1.1
         with:
           dotnet-version: '6.0.x'
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.TOKEN}}
       - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Publish the package to GPR
-        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg
+        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.TOKEN}}
