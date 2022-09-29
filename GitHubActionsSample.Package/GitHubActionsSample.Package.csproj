@@ -8,7 +8,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <PackageId>GitHubActions.Sample</PackageId>
+        <PackageId>GitHubActionsSample.Package</PackageId>
         <Version>0.0.1</Version>
         <Authors>Mykyta Zotov</Authors>
         <Company>Andersen</Company>
