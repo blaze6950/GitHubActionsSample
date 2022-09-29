@@ -20,4 +20,4 @@ jobs:
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Publish the package to GPR
-        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/*.nupkg
+        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.nupkg
