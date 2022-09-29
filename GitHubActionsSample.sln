@@ -4,6 +4,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubActionsSample.Api", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubActionsSample.Package", "GitHubActionsSample.Package\GitHubActionsSample.Package.csproj", "{607D44E4-5A36-4ED7-9C00-2E195FEC5E7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubActionsSample.Api.Tests", "GitHubActionsSample.Api.Tests\GitHubActionsSample.Api.Tests.csproj", "{7B78D71A-F33D-4A0C-AB99-379E5F31C2E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8DD052FC-1CFC-46EC-A7F6-734725A92733}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BB685C5F-4BEE-4E76-9007-7F1B8E846C3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{DEF66065-10E9-4197-ADC3-C56244C28BDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +26,14 @@ Global
 		{607D44E4-5A36-4ED7-9C00-2E195FEC5E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{607D44E4-5A36-4ED7-9C00-2E195FEC5E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{607D44E4-5A36-4ED7-9C00-2E195FEC5E7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B78D71A-F33D-4A0C-AB99-379E5F31C2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B78D71A-F33D-4A0C-AB99-379E5F31C2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B78D71A-F33D-4A0C-AB99-379E5F31C2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B78D71A-F33D-4A0C-AB99-379E5F31C2E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E679BA14-7A0A-4FA5-A199-96F788DF59EA} = {8DD052FC-1CFC-46EC-A7F6-734725A92733}
+		{7B78D71A-F33D-4A0C-AB99-379E5F31C2E5} = {BB685C5F-4BEE-4E76-9007-7F1B8E846C3C}
+		{607D44E4-5A36-4ED7-9C00-2E195FEC5E7D} = {DEF66065-10E9-4197-ADC3-C56244C28BDF}
 	EndGlobalSection
 EndGlobal
