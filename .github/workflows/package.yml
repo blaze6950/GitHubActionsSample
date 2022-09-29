@@ -19,18 +19,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v2.1.1
-        with:
-          dotnet-version: '6.0.x'
-      - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
-      - name: Test
-        run: dotnet test GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal
       - name: Cache
         if: github.ref == 'refs/heads/master'
         uses: actions/cache@v3.0.8
         with:
           path: /home/runner/work/GitHubActionsSample/GitHubActionsSample/GitHubActionsSample.Package/bin/Release
           key: binaries
+      - uses: actions/setup-dotnet@v2.1.1
+        with:
+          dotnet-version: '6.0.x'
+      - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - name: Test
+        run: dotnet test GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal
   publish:
     if: github.ref == 'refs/heads/master'
     needs: build-and-test
