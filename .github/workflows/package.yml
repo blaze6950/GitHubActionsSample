@@ -3,11 +3,19 @@
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'GitHubActionsSample.Package/**'
+      - 'GitHubActionsSample.Package.Tests/**'
+      - '.github/workflows/package.yml'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'GitHubActionsSample.Package/**'
+      - 'GitHubActionsSample.Package.Tests/**'
+      - '.github/workflows/package.yml'
 
 jobs:
-  build-and-publish:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +23,15 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - name: Test
+        run: dotnet test GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --no-build --verbosity normal
       - name: Create the package
         run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+  publish:
+    if: github.branch == 'master'
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
       - name: Publish the package to GPR
         run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/blaze6950/index.json
