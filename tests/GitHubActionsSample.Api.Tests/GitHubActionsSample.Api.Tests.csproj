@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GitHubActionsSample.Api\GitHubActionsSample.Api.csproj" />
+      <ProjectReference Include="..\..\src\GitHubActionsSample.Api\GitHubActionsSample.Api.csproj" />
     </ItemGroup>
 
 </Project>
