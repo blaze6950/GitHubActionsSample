@@ -5,16 +5,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj", "GitHubActionsSample.Api/"]
-RUN dotnet restore "src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj"
-COPY . .
-WORKDIR "/src/GitHubActionsSample"
-RUN dotnet build "GitHubActionsSample.csproj" -c Release -o /app/build
+COPY ["src/GitHubActionsSample.Api/.", "GitHubActionsSample.Api/"]
+RUN dotnet restore "GitHubActionsSample.Api/GitHubActionsSample.Api.csproj"
+#COPY . .
+WORKDIR "/GitHubActionsSample.Api"
+RUN dotnet build "GitHubActionsSample.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "GitHubActionsSample.csproj" -c Release -o /app/publish
+RUN dotnet publish "GitHubActionsSample.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GitHubActionsSample.dll"]
+ENTRYPOINT ["dotnet", "GitHubActionsSample.Api.dll"]
