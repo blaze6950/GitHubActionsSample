@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <PackageReference Include="GitHubActionsSample.Package" Version="0.0.1" />
+        <PackageReference Include="Polly" Version="7.2.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
