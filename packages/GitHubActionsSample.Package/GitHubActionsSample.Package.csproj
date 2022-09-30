@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>GitHubActionsSample.Package</RootNamespace>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <PackageId>GitHubActionsSample.Package</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Mykyta Zotov</Authors>
+        <Company>Andersen</Company>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RepositoryUrl>https://github.com/blaze6950/GitHubActionsSample</RepositoryUrl>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    </ItemGroup>
+
+</Project>
