@@ -1,7 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
-    <BaseOutputPath>$(RepositoryRoot)/build/bin/$(MSBuildProjectName)/</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(RepositoryRoot)/build/obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
-  </PropertyGroup>  
-</Project>
