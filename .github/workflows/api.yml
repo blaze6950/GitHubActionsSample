@@ -5,14 +5,14 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'GitHubActionsSample.Api/**'
-      - 'GitHubActionsSample.Api.Tests/**'
+      - 'src/GitHubActionsSample.Api/**'
+      - 'tests/GitHubActionsSample.Api.Tests/**'
       - '.github/workflows/api.yml'
   pull_request:
     branches: [ master ]
     paths:
-      - 'GitHubActionsSample.Api/**'
-      - 'GitHubActionsSample.Api.Tests/**'
+      - 'src/GitHubActionsSample.Api/**'
+      - 'tests/GitHubActionsSample.Api.Tests/**'
       - '.github/workflows/api.yml'
 
 jobs:
@@ -33,10 +33,10 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Restore dependencies
-        run: dotnet restore GitHubActionsSample.Api/GitHubActionsSample.Api.csproj
-      - run: dotnet build --configuration Release GitHubActionsSample.Api/GitHubActionsSample.Api.csproj
+        run: dotnet restore src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj
+      - run: dotnet build --configuration Release src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj
       - name: Test
-        run: dotnet test GitHubActionsSample.Api.Tests/GitHubActionsSample.Api.Tests.csproj --verbosity normal
+        run: dotnet test tests/GitHubActionsSample.Api.Tests/GitHubActionsSample.Api.Tests.csproj --verbosity normal
   publish:
     if: github.ref == 'refs/heads/master'
     needs: build-and-test

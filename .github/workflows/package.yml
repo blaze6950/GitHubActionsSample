@@ -5,14 +5,14 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'GitHubActionsSample.Package/**'
-      - 'GitHubActionsSample.Package.Tests/**'
+      - 'packages/GitHubActionsSample.Package/**'
+      - 'tests/GitHubActionsSample.Package.Tests/**'
       - '.github/workflows/package.yml'
   pull_request:
     branches: [ master ]
     paths:
-      - 'GitHubActionsSample.Package/**'
-      - 'GitHubActionsSample.Package.Tests/**'
+      - 'packages/GitHubActionsSample.Package/**'
+      - 'tests/GitHubActionsSample.Package.Tests/**'
       - '.github/workflows/package.yml'
 
 jobs:
@@ -29,9 +29,9 @@ jobs:
       - uses: actions/setup-dotnet@v2.1.1
         with:
           dotnet-version: '6.0.x'
-      - run: dotnet build --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - run: dotnet build --configuration Release packages/GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Test
-        run: dotnet test GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal
+        run: dotnet test tests/GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal
   publish:
     if: github.ref == 'refs/heads/master'
     needs: build-and-test
@@ -44,6 +44,6 @@ jobs:
           path: GitHubActionsSample.Package
           key: package-binaries
       - name: Create the package
-        run: dotnet pack --configuration Release GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+        run: dotnet pack --configuration Release packages/GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
       - name: Publish the package to GPR
-        run: dotnet nuget push GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/blaze6950/index.json
+        run: dotnet nuget push build/bin/GitHubActionsSample.Package/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/blaze6950/index.json
