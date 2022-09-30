@@ -5,8 +5,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["GitHubActionsSample/GitHubActionsSample.csproj", "GitHubActionsSample/"]
-RUN dotnet restore "GitHubActionsSample/GitHubActionsSample.csproj"
+COPY ["src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj", "GitHubActionsSample.Api/"]
+RUN dotnet restore "src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj"
 COPY . .
 WORKDIR "/src/GitHubActionsSample"
 RUN dotnet build "GitHubActionsSample.csproj" -c Release -o /app/build
