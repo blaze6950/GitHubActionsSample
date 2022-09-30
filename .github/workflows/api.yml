@@ -57,7 +57,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
-          file: {context}/GitHubActionsSample.Api/Dockerfile
+          context: ./GitHubActionsSample.Api
+#          file: {context}/GitHubActionsSample.Api/Dockerfile
           push: true
           tags: github-sample/api:latest
