@@ -38,6 +38,9 @@ jobs:
           source-url: https://nuget.pkg.github.com/blaze6950/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Put github token for the auth into GPR
+        run: |
+          find . -name "nuget.config" -exec sed -i "s/TOKEN/${{secrets.GITHUB_TOKEN}}/g" nuget.config {} \;
       - name: Restore dependencies
         run: dotnet restore src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj
       - run: dotnet build --configuration Release src/GitHubActionsSample.Api/GitHubActionsSample.Api.csproj
@@ -57,9 +60,6 @@ jobs:
             src/GitHubActionsSample.Api
             Dockerfile
           key: api-binaries
-      - name: Put github token for the auth into GPR
-        run: |
-          find . -name "nuget.config" -exec sed -i "s/TOKEN/${{secrets.GITHUB_TOKEN}}/g" nuget.config {} \;
 #      - name: Login to GitHub Container Registry
 #        uses: docker/login-action@v2
 #        with:
