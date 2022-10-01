@@ -8,16 +8,16 @@ on:
       - 'src/GitHubActionsSample.Api/**'
       - 'tests/GitHubActionsSample.Api.Tests/**'
       - '.github/workflows/api.yml'
-      - './Dockerfile'
-      - './nuget.config'
+      - 'Dockerfile'
+      - 'nuget.config'
   pull_request:
     branches: [ master ]
     paths:
       - 'src/GitHubActionsSample.Api/**'
       - 'tests/GitHubActionsSample.Api.Tests/**'
       - '.github/workflows/api.yml'
-      - './Dockerfile'
-      - './nuget.config'
+      - 'Dockerfile'
+      - 'nuget.config'
 
 jobs:
   build-and-test:
