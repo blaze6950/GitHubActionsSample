@@ -49,6 +49,12 @@ jobs:
 #        with:
 #          path: GitHubActionsSample.Api
 #          key: api-binaries
+      - uses: actions/setup-dotnet@v2.1.1
+        with:
+          dotnet-version: '6.0.x'
+          source-url: https://nuget.pkg.github.com/blaze6950/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
