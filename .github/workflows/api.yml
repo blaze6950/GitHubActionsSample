@@ -36,9 +36,9 @@ jobs:
       - uses: actions/setup-dotnet@v2.1.1
         with:
           dotnet-version: '6.0.x'
-          source-url: https://nuget.pkg.github.com/blaze6950/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+#          source-url: https://nuget.pkg.github.com/blaze6950/index.json
+#        env:
+#          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Put github token for the auth into GPR
         run: |
           find . -name "nuget.config" -exec sed -i "s/TOKEN/${{secrets.GITHUB_TOKEN}}/g" nuget.config {} \;
