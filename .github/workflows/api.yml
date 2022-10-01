@@ -8,12 +8,14 @@ on:
       - 'src/GitHubActionsSample.Api/**'
       - 'tests/GitHubActionsSample.Api.Tests/**'
       - '.github/workflows/api.yml'
+      - './Dockerfile'
   pull_request:
     branches: [ master ]
     paths:
       - 'src/GitHubActionsSample.Api/**'
       - 'tests/GitHubActionsSample.Api.Tests/**'
       - '.github/workflows/api.yml'
+      - './Dockerfile'
 
 jobs:
   build-and-test:
