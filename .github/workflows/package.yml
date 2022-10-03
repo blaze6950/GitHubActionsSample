@@ -1,49 +1,49 @@
-﻿name: .NET Package
+﻿name: .NET Package # The workflow name. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [ master ]
-    paths:
+on: # The definition of events which trigger the workflow. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+  workflow_dispatch: # Event that allows the manual triggering of the workflow. Docs: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+  push: # Event that triggers the workflow when a commit or tag was pushed. Docs: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push
+    branches: [ master ] # Running your workflow only when a push to specific branches occurs
+    paths: # Running your workflow only when a push affects specific files. Docs: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-only-when-a-push-affects-specific-files
       - 'packages/GitHubActionsSample.Package/**'
       - 'tests/GitHubActionsSample.Package.Tests/**'
       - '.github/workflows/package.yml'
-  pull_request:
-    branches: [ master ]
-    paths:
+  pull_request: # Event that triggers the workflow when activity on a PR in the workflow's repo occurs. Docs: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
+    branches: [ master ] # Running your workflow only when a pull request to specific branches occurs
+    paths: # Running your workflow only when PR changes specific files. Docs: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-based-on-files-changed-in-a-pull-request
       - 'packages/GitHubActionsSample.Package/**'
       - 'tests/GitHubActionsSample.Package.Tests/**'
       - '.github/workflows/package.yml'
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Cache
-        if: github.ref == 'refs/heads/master'
-        uses: actions/cache@v3.0.8
-        with:
-          path: packages/GitHubActionsSample.Package
-          key: ${{ github.run_id }}
-      - uses: actions/setup-dotnet@v2.1.1
-        with:
+jobs: # Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobs
+  build-and-test: # The name of the first job in the workflow, which is displayed in the GitHub UI.
+    runs-on: ubuntu-latest # Defines the type of machine to run the job on. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    steps: # Sequence of tasks/steps - steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idsteps
+      - uses: actions/checkout@v3 # Selects an action to run as part of a step in the job. Here the "actions/checkout@v3" action is used. "uses" docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsuses; "actions/checkout@v3" docs: https://github.com/actions/checkout#checkout-v3
+      - name: Cache # A name for your step to display on GitHub.
+        if: github.ref == 'refs/heads/master' # Checks the condition to prevent the step from running unless a condition is met. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsif
+        uses: actions/cache@v3.0.8 # "actions/cache@v3.0.8" docs: https://github.com/actions/cache#cache
+        with: # A map of input params for the specified action. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepswith
+          path: packages/GitHubActionsSample.Package # Specifies the path that should be cached.
+          key: ${{ github.run_id }} # The cache key value. "github.run_id" is unique for the whole workflow run.
+      - uses: actions/setup-dotnet@v2.1.1 # This action sets up a .NET CLI environment for use in actions. Docs: https://github.com/actions/setup-dotnet
+        with: # Input parameter with the version value.
           dotnet-version: '6.0.x'
-      - run: dotnet build --configuration Release packages/GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
+      - run: dotnet build --configuration Release packages/GitHubActionsSample.Package/GitHubActionsSample.Package.csproj # Builds the GitHubActionsSample.Package project with the Release configuration.
       - name: Test
-        run: dotnet test tests/GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal
-  publish:
-    if: github.ref == 'refs/heads/master'
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    environment: production
+        run: dotnet test tests/GitHubActionsSample.Package.Tests/GitHubActionsSample.Package.Tests.csproj --verbosity normal # Executes tests in the GitHubActionsSample.Package.Tests project.
+  publish: # The second job in the workflow.
+    if: github.ref == 'refs/heads/master' # A condition to prevent a job from running unless a condition is met. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idif
+    needs: build-and-test # Points to the "build-and-test" job that must complete successfully before this job will run. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idneeds
+    runs-on: ubuntu-latest # Defines the type of machine to run the job on. Docs: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    environment: production # References to the "production" environment. This allows to request an approval for the job execution. Docs: https://docs.github.com/en/actions/managing-workflow-runs/reviewing-deployments
     steps:
-      - name: Cache
+      - name: Cache # Here the cached data is unpacked for working with it without redundant steps that were done in the previous job.
         uses: actions/cache@v3.0.8
         with:
           path: packages/GitHubActionsSample.Package
-          key: ${{ github.run_id }}
-      - name: Create the package
+          key: ${{ github.run_id }} # The "github.run_id" identifier is the same for the workflow execution.
+      - name: Create the package # Executes the "dotnet pack" command for packing the project into the nuget package.
         run: dotnet pack --configuration Release packages/GitHubActionsSample.Package/GitHubActionsSample.Package.csproj
-      - name: Publish the package to GPR
+      - name: Publish the package to GPR # Pushes the packed package from the previous step into The GitHub Package Registry.
         run: dotnet nuget push packages/GitHubActionsSample.Package/bin/Release/GitHubActionsSample.Package.*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/blaze6950/index.json
