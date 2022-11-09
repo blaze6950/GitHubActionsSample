@@ -9,7 +9,7 @@
     
     <PropertyGroup>
         <PackageId>GitHubActionsSample.Package</PackageId>
-        <Version>0.0.1</Version>
+        <Version>1.0.0</Version>
         <Authors>Mykyta Zotov</Authors>
         <Company>Andersen</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
