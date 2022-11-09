@@ -6,7 +6,7 @@ namespace GitHubActionsSample.Package.Services;
 internal class MockWeatherProvider : IWeatherProvider
 {
     private static readonly string[] Summaries = {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching", "Test"
     };
 
     public Task<IEnumerable<WeatherForecast>> GetWeatherForecastAsync() =>
