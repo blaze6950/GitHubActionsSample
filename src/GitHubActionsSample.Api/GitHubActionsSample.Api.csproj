@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="GitHubActionsSample.Package" Version="0.0.1" />
+        <PackageReference Include="GitHubActionsSample.Package" Version="1.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
